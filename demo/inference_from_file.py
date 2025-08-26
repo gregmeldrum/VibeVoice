@@ -166,7 +166,7 @@ def parse_args():
     parser.add_argument(
         "--device",
         type=str,
-        default="cuda" if torch.cuda.is_available() else "cpu",
+        default="mps" if torch.mps.is_available() else "cpu",
         help="Device for tensor tests",
     )
     parser.add_argument(
@@ -247,8 +247,9 @@ def main():
     model = VibeVoiceForConditionalGenerationInference.from_pretrained(
         args.model_path,
         torch_dtype=torch.bfloat16,
-        device_map='cuda',
-        attn_implementation="flash_attention_2" # we only test flash_attention_2
+        device_map='mps',
+        attn_implementation="sdpa",
+        #attn_implementation="flash_attention_2" # we only test flash_attention_2
     )
 
     model.eval()
