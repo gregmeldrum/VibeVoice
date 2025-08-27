@@ -175,6 +175,11 @@ def parse_args():
         default=1.3,
         help="CFG (Classifier-Free Guidance) scale for generation (default: 1.3)",
     )
+    parser.add_argument(
+        "--use_eager",
+        action="store_true",
+        help="Use eager attention mode instead of flash_attention_2",
+    )
     
     return parser.parse_args()
 
@@ -244,6 +249,7 @@ def main():
     processor = VibeVoiceProcessor.from_pretrained(args.model_path)
 
     # Load model
+    attn_implementation = "flash_attention_2" if not args.use_eager else "eager"
     model = VibeVoiceForConditionalGenerationInference.from_pretrained(
         args.model_path,
         torch_dtype=torch.bfloat16,
