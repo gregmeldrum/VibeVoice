@@ -1,6 +1,7 @@
 <div align="center">
 
 ## 🎙️ VibeVoice: A Frontier Long Conversational Text-to-Speech Model
+
 [![Project Page](https://img.shields.io/badge/Project-Page-blue?logo=microsoft)](https://microsoft.github.io/VibeVoice)
 [![Hugging Face](https://img.shields.io/badge/HuggingFace-Collection-orange?logo=huggingface)](https://huggingface.co/collections/microsoft/vibevoice-68a2ef24a875c44be47b034f)
 [![Technical Report](https://img.shields.io/badge/Technical-Report-red?logo=adobeacrobatreader)](https://arxiv.org/pdf/2508.19205)
@@ -15,14 +16,14 @@ VibeVoice is a novel framework designed for generating **expressive**, **long-fo
 
 A core innovation of VibeVoice is its use of continuous speech tokenizers (Acoustic and Semantic) operating at an ultra-low frame rate of 7.5 Hz. These tokenizers efficiently preserve audio fidelity while significantly boosting computational efficiency for processing long sequences. VibeVoice employs a [next-token diffusion](https://arxiv.org/abs/2412.08635) framework, leveraging a Large Language Model (LLM) to understand textual context and dialogue flow, and a diffusion head to generate high-fidelity acoustic details.
 
-The model can synthesize speech up to **90 minutes** long with up to **4 distinct speakers**, surpassing the typical 1-2 speaker limits of many prior models. 
-
+The model can synthesize speech up to **90 minutes** long with up to **4 distinct speakers**, surpassing the typical 1-2 speaker limits of many prior models.
 
 <p align="left">
   <img src="Figures/MOS-preference.png" alt="MOS Preference Results" height="260px">
   <img src="Figures/VibeVoice.jpg" alt="VibeVoice Overview" height="250px" style="margin-right: 10px;">
 </p>
 
+=======
 ### 🔥 News
 
 - **[2025-08-26] 🎉 We Opensource the [VibeVoice-7B-Preview](https://huggingface.co/WestZhang/VibeVoice-Large-pt) model weights!**
@@ -46,6 +47,7 @@ https://github.com/user-attachments/assets/f009bbfd-23b9-41f2-9c7c-14484d2b8395
 </div>
 
 **Cross-Lingual**
+
 <div align="center">
 
 https://github.com/user-attachments/assets/838d8ad9-a201-4dde-bb45-8cd3f59ce722
@@ -53,12 +55,12 @@ https://github.com/user-attachments/assets/838d8ad9-a201-4dde-bb45-8cd3f59ce722
 </div>
 
 **Spontaneous Singing**
+
 <div align="center">
 
 https://github.com/user-attachments/assets/6f27a8a5-0c60-4f57-87f3-7dea2e11c730
 
 </div>
-
 
 **Long Conversation with 4 people**
 <div align="center">
@@ -71,8 +73,8 @@ For more examples, see the [Project Page](https://microsoft.github.io/VibeVoice)
 
 Try your own samples at [Demo](https://aka.ms/VibeVoice-Demo).
 
-
 ## Models
+
 | Model | Context Length | Generation Length |  Weight |
 |-------|----------------|----------|----------|
 | VibeVoice-0.5B-Streaming | - | - | On the way |
@@ -80,11 +82,13 @@ Try your own samples at [Demo](https://aka.ms/VibeVoice-Demo).
 | VibeVoice-7B-Preview| 32K | ~45 min | [HF link](https://huggingface.co/WestZhang/VibeVoice-Large-pt) |
 
 ## Installation
-We recommend to use NVIDIA Deep Learning Container to manage the CUDA environment. 
+
+We recommend to use NVIDIA Deep Learning Container to manage the CUDA environment.
 
 1. Launch docker
+
 ```bash
-# NVIDIA PyTorch Container 24.07 / 24.10 / 24.12 verified. 
+# NVIDIA PyTorch Container 24.07 / 24.10 / 24.12 verified.
 # Later versions are also compatible.
 sudo docker run --privileged --net=host --ipc=host --ulimit memlock=-1:-1 --ulimit stack=-1:-1 --gpus all --rm -it  nvcr.io/nvidia/pytorch:24.07-py3
 
@@ -94,11 +98,14 @@ sudo docker run --privileged --net=host --ipc=host --ulimit memlock=-1:-1 --ulim
 ```
 
 2. Install from github
+
 ```bash
 git clone https://github.com/microsoft/VibeVoice.git
 cd VibeVoice/
 
-pip install -e .
+uv venv --python 3.10
+source .venv/bin/activate
+uv pip install -e .
 ```
 
 ## Usages
@@ -110,6 +117,7 @@ We observed users may encounter occasional instability when synthesizing Chinese
 - Using the 7B model variant, which is considerably more stable.
 
 ### Usage 1: Launch Gradio demo
+
 ```bash
 apt update && apt install ffmpeg -y # for demo
 
@@ -121,6 +129,7 @@ python demo/gradio_demo.py --model_path WestZhang/VibeVoice-Large-pt --share
 ```
 
 ### Usage 2: Inference from files directly
+
 ```bash
 # We provide some LLM generated example scripts under demo/text_examples/ for demo
 # 1 speaker

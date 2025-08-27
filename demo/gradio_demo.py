@@ -32,7 +32,7 @@ logger = logging.get_logger(__name__)
 
 
 class VibeVoiceDemo:
-    def __init__(self, model_path: str, device: str = "cuda", inference_steps: int = 5):
+    def __init__(self, model_path: str, device: str = "mps", inference_steps: int = 5):
         """Initialize the VibeVoice demo with model loading."""
         self.model_path = model_path
         self.device = device
@@ -57,8 +57,9 @@ class VibeVoiceDemo:
         self.model = VibeVoiceForConditionalGenerationInference.from_pretrained(
             self.model_path,
             torch_dtype=torch.bfloat16,
-            device_map='cuda',
-            attn_implementation="flash_attention_2",
+            device_map='mps',
+            attn_implementation="eager",
+            #attn_implementation="flash_attention_2",
         )
         self.model.eval()
         
@@ -1107,7 +1108,7 @@ def parse_args():
     parser.add_argument(
         "--device",
         type=str,
-        default="cuda" if torch.cuda.is_available() else "cpu",
+        default="mps" if torch.mps.is_available() else "cpu",
         help="Device for inference",
     )
     parser.add_argument(

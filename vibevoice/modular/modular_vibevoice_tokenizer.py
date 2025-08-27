@@ -1004,7 +1004,7 @@ class VibeVoiceAcousticTokenizerModel(PreTrainedModel):
     
     config_class = VibeVoiceAcousticTokenizerConfig
     base_model_prefix = "vibevoice_acoustic_tokenizer"
-    _supports_flash_attn_2 = True  
+    _supports_flash_attn_2 = False  
     _supports_sdpa = True  
     _no_split_modules = ["TokenizerEncoder", "TokenizerDecoder"]
 
@@ -1120,7 +1120,7 @@ class VibeVoiceSemanticTokenizerModel(PreTrainedModel):
     
     config_class = VibeVoiceSemanticTokenizerConfig
     base_model_prefix = "vibevoice_semantic_tokenizer"
-    _supports_flash_attn_2 = True  
+    _supports_flash_attn_2 = False  
     _supports_sdpa = True  
     _no_split_modules = ["TokenizerEncoder"]
     
