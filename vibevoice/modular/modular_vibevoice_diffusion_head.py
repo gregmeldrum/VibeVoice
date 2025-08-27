@@ -198,7 +198,7 @@ class VibeVoiceDiffusionHead(PreTrainedModel):
     """
     config_class = VibeVoiceDiffusionHeadConfig
     supports_gradient_checkpointing = True
-    _supports_flash_attn_2 = True  
+    _supports_flash_attn_2 = False  
     _supports_sdpa = True  
     
     def __init__(

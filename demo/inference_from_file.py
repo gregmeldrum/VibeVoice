@@ -248,12 +248,14 @@ def main():
         args.model_path,
         torch_dtype=torch.bfloat16,
         device_map='mps',
-        attn_implementation="sdpa",
+        attn_implementation="eager",
         #attn_implementation="flash_attention_2" # we only test flash_attention_2
     )
 
     model.eval()
     model.set_ddpm_inference_steps(num_steps=10)
+
+    model.model.noise_scheduler = model.model.noise_scheduler.from_config(model.model.noise_scheduler.config, algorithm_type='sde-dpmsolver++', beta_schedule='squaredcos_cap_v2')
 
     if hasattr(model.model, 'language_model'):
        print(f"Language model attention: {model.model.language_model.config._attn_implementation}")
